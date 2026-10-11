@@ -32,7 +32,7 @@ A new Flutter project.
 | 항목 | 작성 내용 |
 |---|---|
 | 목표 | 완료·취소 상태 기능을 구현하고, 상태 계약과 작업 컨텍스트 문서를 만들어 AI 요청 A/B를 같은 기준으로 비교하는 것을 목표로 했습니다. |
-| 관찰 | 문장만 보낸 요청 A의 응답은 실제 프로젝트와 이름이 달랐고(StudyGoalScreen, _goals, isCompleted) 요청하지 않은 Checkbox·색상 변경이 있었습니다. 컨텍스트를 함께 보낸 요청 B의 응답은 실제 이름(HomeScreen, goals, isDone)과 일치했습니다. 또한 문서를 메모장에 붙여 넣은 뒤 줄 앞에 백슬래시(#, -, _)와 줄 사이 빈 줄이 생긴 것을 관찰했습니다. |
+| 관찰 | 문장만 보낸 요청 A의 응답은 실제 프로젝트와 이름이 달랐고(StudyGoalScreen, _goals, isCompleted) 요청하지 않은 Checkbox·색상 변경이 있었습니다. 컨텍스트를 함께 보낸 요청 B의 응답은 실제 이름(HomeScreen, goals, isDone)과 일치했습니다. 또한 문서를 메모장에 붙여 넣은 뒤 줄 앞에 백슬래시 기호와 줄 사이 빈 줄이 생긴 것을 관찰했습니다. |
 | 원인 | B는 입력에 완성된 main.dart가 포함되어 있어 응답이 입력 코드와 거의 같았습니다. 따라서 컨텍스트가 코드 품질을 높였다고 결론 내릴 수 없습니다. 백슬래시는 붙여 넣기 과정의 서식 변환으로 추정되며 정확한 원인은 확인 불가입니다. |
 | 행동 | PowerShell 명령으로 백슬래시와 빈 줄을 제거하고 깨진 글자 개수를 확인한 뒤 다시 commit·push했습니다. |
 | 결과 | 깨진 글자 0개를 확인했고, GitHub에서 흐름도와 표가 정상으로 표시되는 것을 확인했습니다. 요청 A/B 응답 코드는 실행하지 않았고 flutter analyze도 돌리지 않아 동작은 미확인으로 기록했습니다. |
@@ -42,7 +42,7 @@ A new Flutter project.
 
 **1. 누가 상태를 소유하는가**
 
-원본 상태 `goals`(List<StudyGoal>, 필드 title·isDone)는 `lib/main.dart`의 `_HomeScreenState`가 소유합니다. 완료·남은 개수(`completedCount`, `remainingCount`)는 저장하지 않고 getter로 `goals`에서 계산합니다.
+원본 상태 `goals`(`List<StudyGoal>`, 필드 title·isDone)는 `lib/main.dart`의 `_HomeScreenState`가 소유합니다. 완료·남은 개수(`completedCount`, `remainingCount`)는 저장하지 않고 getter로 `goals`에서 계산합니다.
 
 **2. AI에게 어떤 자료를 왜 제공했는가**
 
